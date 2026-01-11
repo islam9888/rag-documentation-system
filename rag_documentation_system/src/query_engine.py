@@ -3,6 +3,7 @@ Query Engine for RAG System
 """
 import logging
 from typing import List, Tuple, Optional, Dict
+from datetime import datetime
 
 from llama_index.core import VectorStoreIndex
 
@@ -51,8 +52,9 @@ class QueryEngine:
             # Extract sources
             sources = self._extract_sources(response)
             
-            # Log query
+            # Log query with timestamp
             self.query_history.append({
+                'timestamp': datetime.now().strftime('%H:%M:%S'),
                 'question': question,
                 'answer': answer,
                 'sources': sources
