@@ -89,31 +89,35 @@ class RAGApp:
             return "", history
     
     def export_chat(self) -> str:
-        """Export chat history"""
-        if not self.query_engine:
-            return "No chat history to export"
+    """Export chat history"""
+    if not self.query_engine:
+        return "No chat history to export"
+    
+    history = self.query_engine.get_history()
+    
+    if not history:
+        return "No chat history to export"
+    
+    # Build export text
+    from datetime import datetime
+    text = f"# Chat Export - {datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n"
+    
+    for i, item in enumerate(history, 1):
+
+        timestamp = item.get('timestamp', datetime.now().strftime('%H:%M:%S'))
         
-        history = self.query_engine.get_history()
+        text += f"## [{timestamp}] Q{i}\n\n"
+        text += f"**Question:** {item['question']}\n\n"
+        text += f"**Answer:** {item['answer']}\n\n"
         
-        if not history:
-            return "No chat history to export"
+        if item.get('sources'):
+            text += "**Sources:**\n"
+            for source in item['sources']:
+                text += f"- {source}\n"
         
-        # Build export text
-        text = f"# Chat Export - {datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n"
-        
-        for i, item in enumerate(history, 1):
-            text += f"## [{item.get('timestamp', 'N/A')}] Q{i}\n\n"
-            text += f"**Question:** {item['question']}\n\n"
-            text += f"**Answer:** {item['answer']}\n\n"
-            
-            if item.get('sources'):
-                text += "**Sources:**\n"
-                for source in item['sources']:
-                    text += f"- {source}\n"
-            
-            text += "\n---\n\n"
-        
-        return text
+        text += "\n---\n\n"
+    
+    return text
     
     def clear_chat(self) -> List:
         """Clear chat history"""
@@ -199,7 +203,7 @@ class RAGApp:
 
 def main():
     """Launch the Gradio app"""
-    print("🚀 Starting RAG Documentation Assistant...")
+    print("Starting RAG Documentation Assistant...")
     
     try:
         app = RAGApp()
