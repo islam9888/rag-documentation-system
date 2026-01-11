@@ -1,0 +1,16 @@
+Text Processing ServicesÂ¶
+The modules described in this chapter provide a wide range of string manipulation operations and other text processing services.
+The codecs
+module described under Binary Data Services is also
+highly relevant to text processing. In addition, see the documentation for
+Pythonâs built-in string type in Text Sequence Type â str.
+string
+â Common string operationsstring.templatelib
+â Support for template string literalsre
+â Regular expression operationsdifflib
+â Helpers for computing deltastextwrap
+â Text wrapping and fillingunicodedata
+â Unicode Databasestringprep
+â Internet String Preparationreadline
+â GNU readline interfacerlcompleter
+â Completion function for GNU readline

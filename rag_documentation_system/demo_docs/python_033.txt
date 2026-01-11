@@ -1,0 +1,46 @@
+Graphical user interfaces with TkÂ¶
+Tk/Tcl has long been an integral part of Python. It provides a robust and
+platform independent windowing toolkit, that is available to Python programmers
+using the tkinter
+package, and its extension, the tkinter.ttk
+module.
+The tkinter
+package is a thin object-oriented layer on top of Tcl/Tk. To
+use tkinter
+, you donât need to write Tcl code, but you will need to
+consult the Tk documentation, and occasionally the Tcl documentation.
+tkinter
+is a set of wrappers that implement the Tk widgets as Python
+classes.
+tkinter
+âs chief virtues are that it is fast, and that it usually comes
+bundled with Python. Although its standard documentation is weak, good
+material is available, which includes: references, tutorials, a book and
+others. tkinter
+is also famous for having an outdated look and feel,
+which has been vastly improved in Tk 8.5. Nevertheless, there are many other
+GUI libraries that you could be interested in. The Python wiki lists several
+alternative GUI frameworks and tools.
+tkinter
+â Python interface to Tcl/Tktkinter.colorchooser
+â Color choosing dialogtkinter.font
+â Tkinter font wrapper- Tkinter Dialogs
+tkinter.messagebox
+â Tkinter message promptstkinter.scrolledtext
+â Scrolled Text Widgettkinter.dnd
+â Drag and drop supporttkinter.ttk
+â Tk themed widgets- IDLE â Python editor and shell
+turtle
+â Turtle graphics- Introduction
+- Get started
+- Tutorial
+- How toâ¦
+- Turtle graphics reference
+- Methods of RawTurtle/Turtle and corresponding functions
+- Methods of TurtleScreen/Screen and corresponding functions
+- Public classes
+- Explanation
+- Help and configuration
+turtledemo
+â Demo scripts- Changes since Python 2.6
+- Changes since Python 3.0

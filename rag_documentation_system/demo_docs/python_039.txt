@@ -1,0 +1,15 @@
+Importing ModulesÂ¶
+The modules described in this chapter provide new ways to import other Python modules and hooks for customizing the import process.
+The full list of modules described in this chapter is:
+zipimport
+â Import modules from Zip archivespkgutil
+â Package extension utilitymodulefinder
+â Find modules used by a scriptrunpy
+â Locating and executing Python modulesimportlib
+â The implementation ofimport
+importlib.resources
+â Package resource reading, opening and accessimportlib.resources.abc
+â Abstract base classes for resourcesimportlib.metadata
+â Accessing package metadata- The initialization of the
+sys.path
+module search path

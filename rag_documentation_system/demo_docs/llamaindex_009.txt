@@ -1,0 +1,727 @@
+Skip to content
+LlamaIndex Python Documentation
+Search
+Ctrl
+K
+Cancel
+TypeScript
+Twitter
+LinkedIn
+Bluesky
+GitHub
+Select theme
+Dark
+Light
+Auto
+LlamaCloud
+Welcome to LlamaCloud
+Parse
+Overview of LlamaParse
+Getting Started
+Tiers
+Features
+Parsing options
+Multimodal Parsing
+Python Usage
+Layout Extraction
+Metadata
+Cache options
+Structured Output (Beta)
+Webhook
+Supported Document Types
+Job predictability
+Selecting what to parse
+LlamaParse Document Pipeline Triggers
+Parsing instructions (deprecated)
+Prompts
+LlamaParse FAQ
+LlamaParse API v2 Guide
+Examples
+LlamaParse Examples
+Parse All PDFs in a Folder with LlamaParse
+Parse and Analyze Excel Spreadsheets with LlamaParse
+Parse with Additional Prompts
+Migration Guide: Parse Upload Endpoint v1 to v2
+Extract
+Getting Started
+Getting Started
+Using the Web UI
+Python SDK
+REST API
+Features
+LlamaExtract Core Concepts
+Schema Design and Restrictions
+Configuration Options
+Metadata Extensions
+Performance Tips
+Examples
+LlamaExtract Examples
+Auto-Generate Schema for Extraction
+Extract Data from Financial Reports - with Citations and Reasoning
+Extracting Repeating Entities with Table Row Extaction
+Resume Book Processing Agent
+LlamaExtract Privacy
+Classify
+Getting Started
+Getting Started
+Classify Python SDK
+Examples
+LlamaClassify Examples
+Classify Contract Types
+Split
+Getting Started
+Getting Started
+REST API
+Examples
+Splitting Concatenated Documents
+Split Examples
+Index
+Getting Started
+Usage Guides
+Index Usage Guides
+Index Status Monitoring
+Index API & Clients Guide
+Index Framework Integration
+Index No-code UI Guide
+How-to Guides
+Files
+Extracting Figures from Documents
+Examples
+Index Examples
+Building RAG Applications with Index & Agents
+Integrations
+Data Sinks
+Data Sinks
+AstraDB
+Azure AI Search
+Managed Data Sink
+Milvus
+MongoDB Atlas Vector Search
+Pinecone
+Postgres
+Qdrant
+Data Sources
+Data Sources
+Azure Blob Storage Data Source
+Box Storage Data Source
+Confluence Data Source
+File Upload Data Source
+Google Drive Data Source
+Jira Data Source
+Microsoft OneDrive Data Source
+S3 Data Source
+Microsoft SharePoint Data Source
+Embedding Models
+Embedding Models
+Azure Embedding
+Bedrock Embedding
+Cohere Embedding
+Gemini Embedding
+HuggingFace Embedding
+OpenAI Embedding
+Multi-Environments
+Parsing & Transformation
+Retrieval
+Basic
+Retrieval Modes
+Advanced
+Composite Retrieval
+Image Retrieval
+Sheets
+Examples
+LlamaSheets Examples
+Using LlamaSheets with Coding Agents
+Using LlamaSheets with Custom Agents and Workflows
+Getting Started
+General
+API Key
+Pricing
+Organizations
+Regions
+Billing and Usage
+Webhooks
+Rate Limits
+Self-Hosting
+Quick Start
+Frequently Asked Questions
+Architecture
+Cloud-Specific Guides
+Overview
+Azure Deployment
+Azure Setup Guide
+Validation Guide
+Troubleshooting Guide
+Configuration
+Auth
+File Storage
+Ingress
+Databases and Queues
+Overview
+Azure Service Bus as Job Queue
+LLM Integrations
+Overview
+OpenAI Setup
+Azure OpenAI Setup
+Anthropic API Setup
+AWS Bedrock Setup
+Google Gemini API Setup
+Google Vertex AI Setup
+Autoscaling
+Global Admin Setup
+Monitoring
+Monitoring
+Tuning
+Service Configurations
+LlamaParse Configuration
+LlamaParse Configuration - Throughput
+Cookbooks
+Cookbooks
+Enterprise Rollout
+Cloud API Reference 🔗
+MCP Docs Search
+LlamaAgents
+New
+Overview
+Agent Workflows
+Introduction
+Branches and loops
+Managing State
+Streaming events
+Concurrent execution of workflows
+Human in the Loop
+Customizing entry and exit points
+Drawing a Workflow
+Resource Objects
+Retry steps execution
+Workflows from unbound functions
+Run Your Workflow as a Server
+Writing durable workflows
+Observability
+llamactl
+Getting Started
+Agent Templates
+Click-to-Deploy from LlamaCloud
+Serving your Workflows
+Configuring a UI
+Workflow React Hooks
+Deployment Config Reference
+Continuous Deployment with GitHub Actions
+Agent Data
+Agent Data (Python)
+Agent Data (JavaScript)
+llamactl Reference
+init
+serve
+deployments
+auth
+auth env
+pkg
+Workflows API Reference 🔗
+LlamaIndex Framework
+Welcome to LlamaIndex 🦙 !
+Getting Started
+High-Level Concepts
+Installation and Setup
+How to read these docs
+Starter Tutorial (Using OpenAI)
+Starter Tutorial (Using Local LLMs)
+Discover LlamaIndex Video Series
+Frequently Asked Questions (FAQ)
+Starter Tools
+Starter Tools
+RAG CLI
+Async Programming in Python
+Learn
+Building an LLM application
+Using LLMs
+Building agents
+Building an agent
+Using existing tools
+Maintaining state
+Streaming output and events
+Human in the loop
+Multi-agent patterns in LlamaIndex
+Using Structured Output
+Building a RAG pipeline
+Introduction to RAG
+Indexing
+Indexing
+Loading
+Loading Data (Ingestion)
+Loading from LlamaCloud
+LlamaHub
+Querying
+Querying
+Storing
+Storing
+Structured Data Extraction
+Introduction to Structured Data Extraction
+Using Structured LLMs
+Structured Prediction
+Low-level structured data extraction
+Structured Input
+Tracing And Debugging
+Tracing and Debugging
+Evaluating
+Cost Analysis
+Cost Analysis
+Usage Pattern
+Evaluating
+Putting It All Together
+Putting It All Together
+Agents
+Apps
+Full-Stack Web Application
+A Guide to Building a Full-Stack Web App with LLamaIndex
+A Guide to Building a Full-Stack LlamaIndex Web App with Delphic
+Chatbots
+How to Build a Chatbot
+Q And A
+Q&A patterns
+A Guide to Extracting Terms and Definitions
+Structured Data
+Structured Data
+Privacy and Security
+Use Cases
+Use Cases
+Agents
+Chatbots
+Structured Data Extraction
+Fine-tuning
+Querying Graphs
+Multi-modal
+Prompting
+Question-Answering (RAG)
+Querying CSVs
+Parsing Tables and Charts
+Text to SQL
+Component Guides
+Component Guides
+Deploying
+Agents
+Agents
+Memory
+Module Guides
+Tools
+Chat Engines
+Chat Engine
+Module Guides
+Usage Pattern
+Query Engine
+Query Engine
+Module Guides
+Response Modes
+Streaming
+Supporting Modules
+Usage Pattern
+Evaluating
+Evaluating
+Contributing A `LabelledRagDataset`
+Evaluating Evaluators with `LabelledEvaluatorDataset`'s
+Evaluating With `LabelledRagDataset`'s
+Modules
+Usage Pattern (Response Evaluation)
+Usage Pattern (Retrieval)
+Indexing
+Indexing
+Document Management
+How Each Index Works
+LlamaCloudIndex + LlamaCloudRetriever
+Using a Property Graph Index
+Metadata Extraction
+Module Guides
+Using VectorStoreIndex
+Loading
+Loading Data
+Connector
+Data Connectors (LlamaHub)
+LlamaParse
+Module Guides
+Usage Pattern
+Documents And Nodes
+Documents / Nodes
+Defining and Customizing Documents
+Metadata Extraction Usage Pattern
+Defining and Customizing Nodes
+Ingestion Pipeline
+Ingestion Pipeline
+Transformations
+Node Parsers
+Node Parser Usage Pattern
+Node Parser Modules
+SimpleDirectoryReader
+MCP
+Model Context Protocol (MCP)
+Converting Existing LlamaIndex Workflows & Tools to MCP
+LlamaCloud MCP Servers & Tools
+Using MCP Tools with LlamaIndex
+Models
+Models
+Embeddings
+Llms
+Using LLMs
+Using local models
+Available LLM integrations
+Customizing LLMs within LlamaIndex Abstractions
+Using LLMs as standalone modules
+Multi-modal models
+Prompts
+Prompts
+Prompt Usage Pattern
+Observability
+Observability
+Callbacks
+Callbacks
+Token Counting - Migration Guide
+Instrumentation
+Querying
+Querying
+Node Postprocessors
+Node Postprocessor
+Node Postprocessor Modules
+Response Synthesizers
+Response Synthesizer
+Response Synthesis Modules
+Retriever
+Retriever
+Retriever Modes
+Retriever Modules
+Router
+Routers
+Structured Outputs
+Structured Outputs
+Output Parsing Modules
+Pydantic Programs
+(Deprecated) Query Engines + Pydantic Outputs
+Storing
+Storing
+Chat Stores
+Customizing Storage
+Document Stores
+Index Stores
+Key-Value Stores
+Persisting & Loading Data
+Vector Stores
+Supporting Modules
+Migrating from ServiceContext to Settings
+Configuring Settings
+Supporting Modules
+Open Source Community
+FAQ
+Frequently Asked Questions
+Chat Engines
+Documents and Nodes
+Embeddings
+Large Language Models
+Query Engines
+Vector Database
+Full-Stack Projects
+Integrations
+Integrations
+ChatGPT Plugin Integrations
+Unit Testing LLMs/RAG With DeepEval
+Fleet Context Embeddings - Building a Hybrid Search Engine for the Llamaindex Library
+Using Graph Stores
+Tracing with Graphsignal
+Guidance
+LM Format Enforcer
+Using Managed Indices
+Tonic Validate
+Evaluating and Tracking with TruLens
+Perform Evaluations on LlamaIndex with UpTrain
+Using Vector Stores
+Llama Packs
+Llama Packs 🦙📦
+ChangeLog
+Examples
+LLMs
+AI21
+Aleph Alpha
+Anthropic
+Anthropic Prompt Caching
+Anyscale
+ASI LLM
+Azure AI model inference
+Azure OpenAI
+Baseten Cookbook
+Bedrock
+Bedrock Converse
+Cerebras
+Clarifai LLM
+Cleanlab Trustworthy Language Model
+Cohere
+CometAPI
+DashScope LLMS
+Databricks
+DeepInfra
+DeepSeek
+EverlyAI
+Featherless AI LLM
+Fireworks
+Fireworks Function Calling Cookbook
+Friendli
+Gemini
+Google GenAI
+Grok 4
+Groq
+Helicone AI Gateway
+Heroku LLM Managed Inference
+Hugging Face LLMs
+IBM watsonx.ai
+IPEX-LLM on Intel CPU
+IPEX-LLM on Intel GPU
+Konko
+LangChain LLM
+LiteLLM
+Replicate - Llama 2 13B
+🦙 x 🦙 Rap Battle
+Llama API
+LlamaCPP
+llamafile
+LLM Predictor
+LM Studio
+LocalAI
+Maritalk
+MistralRS LLM
+MistralAI
+ModelScope LLMS
+Monster API <> LLamaIndex
+MyMagic AI LLM
+Nebius LLMs
+Netmind AI LLM
+Neutrino AI
+NVIDIA NIMs
+NVIDIA NIMs
+Nvidia TensorRT-LLM
+NVIDIA's LLM Text Completion API
+Nvidia Triton
+Oracle Cloud Infrastructure Data Science
+Oracle Cloud Infrastructure Generative AI
+OctoAI
+Ollama LLM
+Ollama - Gemma
+OpenAI
+OpenAI JSON Mode vs. Function Calling for Data Extraction
+OpenAI Responses API
+OpenRouter
+OpenVINO LLMs
+OpenVINO GenAI LLMs
+Optimum Intel LLMs optimized with IPEX backend
+Using Opus 4.1 with LlamaIndex
+AlibabaCloud-PaiEas
+PaLM
+Perplexity
+[Pipeshift](https://pipeshift.com)
+Portkey
+Predibase
+PremAI LlamaIndex
+Client of Baidu Intelligent Cloud's Qianfan LLM Platform
+RunGPT
+Interacting with LLM deployed in Amazon SageMaker Endpoint with LlamaIndex
+SambaNova Systems
+Together AI LLM
+Upstage
+Vercel AI Gateway
+Vertex AI
+Replicate - Vicuna 13B
+vLLM
+Xorbits Inference
+Yi LLMs
+Embeddings
+Aleph Alpha Embeddings
+Anyscale Embeddings
+Baseten Embeddings
+Bedrock Embeddings
+Embeddings with Clarifai
+Cloudflare Workers AI Embeddings
+CohereAI Embeddings
+Custom Embeddings
+DashScope Embeddings
+Databricks Embeddings
+DeepInfra
+Elasticsearch Embeddings
+Qdrant FastEmbed Embeddings
+Fireworks Embeddings
+Google Gemini Embeddings
+GigaChat
+Google GenAI Embeddings
+Google PaLM Embeddings
+Heroku LLM Managed Inference Embedding
+Local Embeddings with HuggingFace
+IBM watsonx.ai
+Local Embeddings with IPEX-LLM on Intel CPU
+Local Embeddings with IPEX-LLM on Intel GPU
+Isaacus Embeddings
+Jina 8K Context Window Embeddings
+Jina Embeddings
+LangChain Embeddings
+Llamafile Embeddings
+LLMRails Embeddings
+MistralAI Embeddings
+Mixedbread AI Embeddings
+ModelScope Embeddings
+Nebius Embeddings
+Netmind AI Embeddings
+Nomic Embedding
+NVIDIA NIMs
+Oracle Cloud Infrastructure (OCI) Data Science Service
+Oracle Cloud Infrastructure Generative AI
+Ollama Embeddings
+OpenAI Embeddings
+Local Embeddings with OpenVINO
+Optimized Embedding Model using Optimum-Intel
+Oracle AI Vector Search: Generate Embeddings
+PremAI Embeddings
+Interacting with Embeddings deployed in Amazon SageMaker Endpoint with LlamaIndex
+Text Embedding Inference
+TextEmbed - Embedding Inference Server
+Together AI Embeddings
+Upstage Embeddings
+Interacting with Embeddings deployed in Vertex AI Endpoint with LlamaIndex
+VoyageAI Embeddings
+YandexGPT
+Vector Stores
+Alibaba Cloud MySQL
+Alibaba Cloud OpenSearch Vector Store
+Google AlloyDB for PostgreSQL - `AlloyDBVectorStore`
+Amazon Neptune - Neptune Analytics vector store
+AnalyticDB
+ApertureDB as a Vector Store with LlamaIndex.
+Astra DB
+Simple Vector Store - Async Index Creation
+Awadb Vector Store
+Test delete
+Azure AI Search
+Azure CosmosDB MongoDB Vector Store
+Azure Cosmos DB No SQL Vector Store
+Azure Postgres Vector Store
+Bagel Vector Store
+Bagel Network
+Baidu VectorDB
+Cassandra Vector Store
+Auto-Retrieval from a Vector Database
+Chroma Vector Store
+Chroma + Fireworks + Nomic with Matryoshka embedding
+Chroma
+ClickHouse Vector Store
+Google Cloud SQL for PostgreSQL - `PostgresVectorStore`
+Wait until the cluster is ready for use.
+DashVector Vector Store
+Databricks Vector Search
+IBM Db2 Vector Store and Vector Search
+Deep Lake Vector Store Quickstart
+DocArray Hnsw Vector Store
+DocArray InMemory Vector Store
+Dragonfly and Vector Store
+DuckDB
+Auto-Retrieval from a Vector Database
+Elasticsearch
+Elasticsearch Vector Store
+Epsilla Vector Store
+Existing data
+Guide: Using Vector Store Index with Existing Pinecone Vector Store
+Guide: Using Vector Store Index with Existing Weaviate Vector Store
+Faiss Vector Store
+Firestore Vector Store
+Gel Vector Store
+Hnswlib
+Hologres
+Jaguar Vector Store
+Advanced RAG with temporal filters using LlamaIndex and KDB.AI vector store
+LanceDB Vector Store
+Lantern Vector Store (auto-retriever)
+Lantern Vector Store
+Lindorm
+Milvus Vector Store with Async API
+Milvus Vector Store with Full-Text Search
+Milvus Vector Store With Hybrid Search
+Milvus Vector Store
+Milvus Vector Store - Metadata Filter
+MongoDB Atlas Vector Store
+MongoDB Atlas + Fireworks AI RAG Example
+MongoDB Atlas + OpenAI RAG Example
+Moorcheh Vector Store Demo
+MyScale Vector Store
+Neo4j Vector Store - Metadata Filter
+Neo4j vector store
+Nile Vector Store (Multi-tenant PostgreSQL)
+ObjectBox VectorStore Demo
+OceanBase Vector Store
+Opensearch Vector Store
+Oracle AI Vector Search: Vector Store
+pgvecto.rs
+A Simple to Advanced Guide with Auto-Retrieval (with Pinecone + Arize Phoenix)
+Pinecone Vector Store - Metadata Filter
+Pinecone Vector Store
+Pinecone Vector Store - Hybrid Search
+Postgres Vector Store
+Hybrid Search with Qdrant BM42
+Qdrant Hybrid Search
+Hybrid RAG with Qdrant: multi-tenancy, custom sharding, distributed setup
+Qdrant Vector Store - Metadata Filter
+Qdrant Vector Store - Default Qdrant Filters
+Qdrant Vector Store
+Redis Vector Store
+Relyt
+Rockset Vector Store
+S3VectorStore Integration
+Simple Vector Store
+Local Llama2 + VectorStoreIndex
+Llama2 + VectorStoreIndex
+Simple Vector Stores - Maximum Marginal Relevance Retrieval
+S3/R2 Storage
+Supabase Vector Store
+TablestoreVectorStore
+Tair Vector Store
+Tencent Cloud VectorDB
+TiDB Vector Store
+Timescale Vector Store (PostgreSQL)
+txtai Vector Store
+Typesense Vector Store
+Upstash Vector Store
+load documents
+1. Installation
+Google Vertex AI Vector Search
+Google Vertex AI Vector Search v2.0
+Vespa Vector Store demo
+Auto-Retrieval from a Weaviate Vector Database
+Weaviate Vector Store Metadata Filter
+Weaviate Vector Store
+Weaviate Vector Store - Hybrid Search
+**WordLift** Vector Store
+Zep Vector Store
+Retrievers
+Auto Merging Retriever
+Comparing Methods for Structured Retrieval (Auto-Retrieval vs. Recursive Retrieval)
+Bedrock (Knowledge Bases)
+BM25 Retriever
+Composable Objects
+Activeloop Deep Memory
+Ensemble Retrieval Guide
+Chunk + Document Hybrid Retrieval with Long-Context Embeddings (Together.ai)
+Pathway Retriever
+Reciprocal Rerank Fusion Retriever
+Recursive Retriever + Node References + Braintrust
+Recursive Retriever + Node References
+Relative Score Fusion and Distribution-Based Score Fusion
+Router Retriever
+Simple Fusion Retriever
+Auto-Retrieval from a Vectara Index
+Vertex AI Search Retriever
+connect to VideoDB
+You.com Retriever
+Framework API Reference 🔗
+Twitter
+LinkedIn
+Bluesky
+GitHub
+Select theme
+Dark
+Light
+Auto
+Models
+There are a few primary ways you interact with models in LlamaIndex:
+LLMs
+Embeddings
+Experimental
+MultiModal

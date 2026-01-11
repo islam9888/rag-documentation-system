@@ -1,0 +1,27 @@
+Internet Data HandlingÂ¶
+This chapter describes modules which support handling data formats commonly used on the internet.
+email
+â An email and MIME handling packageemail.message
+: Representing an email messageemail.parser
+: Parsing email messagesemail.generator
+: Generating MIME documentsemail.policy
+: Policy Objectsemail.errors
+: Exception and Defect classesemail.headerregistry
+: Custom Header Objectsemail.contentmanager
+: Managing MIME Contentemail
+: Examplesemail.message.Message
+: Representing an email message using thecompat32
+APIemail.mime
+: Creating email and MIME objects from scratchemail.header
+: Internationalized headersemail.charset
+: Representing character setsemail.encoders
+: Encodersemail.utils
+: Miscellaneous utilitiesemail.iterators
+: Iterators
+json
+â JSON encoder and decodermailbox
+â Manipulate mailboxes in various formatsmimetypes
+â Map filenames to MIME typesbase64
+â Base16, Base32, Base64, Base85 Data Encodingsbinascii
+â Convert between binary and ASCIIquopri
+â Encode and decode MIME quoted-printable data

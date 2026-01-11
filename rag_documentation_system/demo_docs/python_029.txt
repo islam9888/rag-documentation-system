@@ -1,0 +1,63 @@
+Internet Protocols and SupportÂ¶
+The modules described in this chapter implement internet protocols and support
+for related technology. They are all implemented in Python. Most of these
+modules require the presence of the system-dependent module socket
+, which
+is currently supported on most popular platforms. Here is an overview:
+webbrowser
+â Convenient web-browser controllerwsgiref
+â WSGI Utilities and Reference Implementationwsgiref.util
+â WSGI environment utilitieswsgiref.headers
+â WSGI response header toolswsgiref.simple_server
+â a simple WSGI HTTP serverwsgiref.validate
+â WSGI conformance checkerwsgiref.handlers
+â server/gateway base classeswsgiref.types
+â WSGI types for static type checking- Examples
+urllib
+â URL handling modulesurllib.request
+â Extensible library for opening URLs- Request Objects
+- OpenerDirector Objects
+- BaseHandler Objects
+- HTTPRedirectHandler Objects
+- HTTPCookieProcessor Objects
+- ProxyHandler Objects
+- HTTPPasswordMgr Objects
+- HTTPPasswordMgrWithPriorAuth Objects
+- AbstractBasicAuthHandler Objects
+- HTTPBasicAuthHandler Objects
+- ProxyBasicAuthHandler Objects
+- AbstractDigestAuthHandler Objects
+- HTTPDigestAuthHandler Objects
+- ProxyDigestAuthHandler Objects
+- HTTPHandler Objects
+- HTTPSHandler Objects
+- FileHandler Objects
+- DataHandler Objects
+- FTPHandler Objects
+- CacheFTPHandler Objects
+- UnknownHandler Objects
+- HTTPErrorProcessor Objects
+- Examples
+- Legacy interface
+urllib.request
+Restrictions
+urllib.response
+â Response classes used by urlliburllib.parse
+â Parse URLs into componentsurllib.error
+â Exception classes raised by urllib.requesturllib.robotparser
+â Parser for robots.txthttp
+â HTTP moduleshttp.client
+â HTTP protocol clientftplib
+â FTP protocol clientpoplib
+â POP3 protocol clientimaplib
+â IMAP4 protocol clientsmtplib
+â SMTP protocol clientuuid
+â UUID objects according to RFC 9562socketserver
+â A framework for network servershttp.server
+â HTTP servershttp.cookies
+â HTTP state managementhttp.cookiejar
+â Cookie handling for HTTP clientsxmlrpc
+â XMLRPC server and client modulesxmlrpc.client
+â XML-RPC client accessxmlrpc.server
+â Basic XML-RPC serversipaddress
+â IPv4/IPv6 manipulation library

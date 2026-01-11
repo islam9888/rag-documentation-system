@@ -1,0 +1,15 @@
+Data Compression and ArchivingÂ¶
+The modules described in this chapter support data compression with the zlib,
+gzip, bzip2, lzma, and zstd algorithms, and the creation of ZIP- and tar-format
+archives. See also Archiving operations provided by the shutil
+module.
+- The
+compression
+package compression.zstd
+â Compression compatible with the Zstandard formatzlib
+â Compression compatible with gzipgzip
+â Support for gzip filesbz2
+â Support for bzip2 compressionlzma
+â Compression using the LZMA algorithmzipfile
+â Work with ZIP archivestarfile
+â Read and write tar archive files

@@ -1,0 +1,259 @@
+- Tool calling - calling external tools (like databases queries or API calls) and use results in their responses.
+- Structured output - where the model’s response is constrained to follow a defined format.
+- Multimodality - process and return data other than text, such as images, audio, and video.
+- Reasoning - models perform multi-step reasoning to arrive at a conclusion.
+For provider-specific integration information and capabilities, see the provider’s chat model page.
+Basic usage
+Models can be utilized in two ways:- With agents - Models can be dynamically specified when creating an agent.
+- Standalone - Models can be called directly (outside of the agent loop) for tasks like text generation, classification, or extraction without the need for an agent framework.
+Initialize a model
+The easiest way to get started with a standalone model in LangChain is to useinit_chat_model
+to initialize one from a chat model provider of your choice (examples below):
+- OpenAI
+- Anthropic
+- Azure
+- Google Gemini
+- AWS Bedrock
+- HuggingFace
+init_chat_model
+for more detail, including information on how to pass model parameters.
+Supported models
+LangChain supports all major model providers, including OpenAI, Anthropic, Google, Azure, AWS Bedrock, and more. Each provider offers a variety of models with different capabilities. For a full list of supported models in LangChain, see the integrations page.Key methods
+Invoke
+The model takes messages as input and outputs messages after generating a complete response.
+Stream
+Invoke the model, but stream the output as it is generated in real-time.
+Batch
+Send multiple requests to a model in a batch for more efficient processing.
+In addition to chat models, LangChain provides support for other adjacent technologies, such as embedding models and vector stores. See the integrations page for details.
+Parameters
+A chat model takes parameters that can be used to configure its behavior. The full set of supported parameters varies by model and provider, but standard ones include:The name or identifier of the specific model you want to use with a provider. You can also specify both the model and its provider in a single argument using the ’:’ format, for example, ‘openai:o1’.
+The key required for authenticating with the model’s provider. This is usually issued when you sign up for access to the model. Often accessed by setting an .
+Controls the randomness of the model’s output. A higher number makes responses more creative; lower ones make them more deterministic.
+Limits the total number of in the response, effectively controlling how long the output can be.
+The maximum time (in seconds) to wait for a response from the model before canceling the request.
+The maximum number of attempts the system will make to resend a request if it fails due to issues like network timeouts or rate limits.
+init_chat_model
+, pass these parameters as inline :
+Initialize using model parameters
+Each chat model integration may have additional params used to control provider-specific functionality.For example,
+ChatOpenAI
+has use_responses_api
+to dictate whether to use the OpenAI Responses or Completions API.To find all the parameters supported by a given chat model, head to the chat model integrations page.Invocation
+A chat model must be invoked to generate an output. There are three primary invocation methods, each suited to different use cases.Invoke
+The most straightforward way to call a model is to useinvoke()
+with a single message or a list of messages.
+Single message
+Dictionary format
+Message objects
+If the return type of your invocation is a string, ensure that you are using a chat model as opposed to a LLM. Legacy, text-completion LLMs return strings directly. LangChain chat models are prefixed with “Chat”, e.g.,
+ChatOpenAI
+(/oss/integrations/chat/openai).Stream
+Most models can stream their output content while it is being generated. By displaying output progressively, streaming significantly improves user experience, particularly for longer responses. Callingstream()
+returns an that yields output chunks as they are produced. You can use a loop to process each chunk in real-time:
+invoke()
+, which returns a single AIMessage
+after the model has finished generating its full response, stream()
+returns multiple AIMessageChunk
+objects, each containing a portion of the output text. Importantly, each chunk in a stream is designed to be gathered into a full message via summation:
+Construct an AIMessage
+invoke()
+– for example, it can be aggregated into a message history and passed back to the model as conversational context.
+Advanced streaming topics
+Advanced streaming topics
+Streaming events
+Streaming events
+LangChain chat models can also stream semantic events using
+astream_events()
+.This simplifies filtering based on event types and other metadata, and will aggregate the full message in the background. See below for an example."Auto-streaming" chat models
+"Auto-streaming" chat models
+LangChain simplifies streaming from chat models by automatically enabling streaming mode in certain cases, even when you’re not explicitly calling the streaming methods. This is particularly useful when you use the non-streaming invoke method but still want to stream the entire application, including intermediate results from the chat model.In LangGraph agents, for example, you can call
+model.invoke()
+within nodes, but LangChain will automatically delegate to streaming if running in a streaming mode.How it works
+When youinvoke()
+a chat model, LangChain will automatically switch to an internal streaming mode if it detects that you are trying to stream the overall application. The result of the invocation will be the same as far as the code that was using invoke is concerned; however, while the chat model is being streamed, LangChain will take care of invoking on_llm_new_token
+events in LangChain’s callback system.Callback events allow LangGraph stream()
+and astream_events()
+to surface the chat model’s output in real-time.Batch
+Batching a collection of independent requests to a model can significantly improve performance and reduce costs, as the processing can be done in parallel:Batch
+By default,
+batch()
+will only return the final output for the entire batch. If you want to receive the output for each individual input as it finishes generating, you can stream results with batch_as_completed()
+:
+Yield batch responses upon completion
+When using
+batch_as_completed()
+, results may arrive out of order. Each includes the input index for matching to reconstruct the original order as needed.Tool calling
+Models can request to call tools that perform tasks such as fetching data from a database, searching the web, or running code. Tools are pairings of:- A schema, including the name of the tool, a description, and/or argument definitions (often a JSON schema)
+- A function or to execute.
+You may hear the term “function calling”. We use this interchangeably with “tool calling”.
+bind_tools
+. In subsequent invocations, the model can choose to call any of the bound tools as needed.
+Some model providers offer that can be enabled via model or invocation parameters (e.g. ChatOpenAI
+, ChatAnthropic
+). Check the respective provider reference for details.
+Binding user tools
+Tool execution loop
+Tool execution loop
+When a model returns tool calls, you need to execute the tools and pass the results back to the model. This creates a conversation loop where the model can use tool results to generate its final response. LangChain includes agent abstractions that handle this orchestration for you.Here’s a simple example of how to do this:Each
+Tool execution loop
+ToolMessage
+returned by the tool includes a tool_call_id
+that matches the original tool call, helping the model correlate results with requests.Forcing tool calls
+Forcing tool calls
+By default, the model has the freedom to choose which bound tool to use based on the user’s input. However, you might want to force choosing a tool, ensuring the model uses either a particular tool or any tool from a given list:
+Parallel tool calls
+Parallel tool calls
+Many models support calling multiple tools in parallel when appropriate. This allows the model to gather information from different sources simultaneously.The model intelligently determines when parallel execution is appropriate based on the independence of the requested operations.
+Parallel tool calls
+Streaming tool calls
+Streaming tool calls
+When streaming responses, tool calls are progressively built through You can accumulate chunks to build complete tool calls:
+ToolCallChunk
+. This allows you to see tool calls as they’re being generated rather than waiting for the complete response.Streaming tool calls
+Accumulate tool calls
+Structured output
+Models can be requested to provide their response in a format matching a given schema. This is useful for ensuring the output can be easily parsed and used in subsequent processing. LangChain supports multiple schema types and methods for enforcing structured output.- Pydantic
+- TypedDict
+- JSON Schema
+Pydantic models provide the richest feature set with field validation, descriptions, and nested structures.
+Key considerations for structured output
+- Method parameter: Some providers support different methods for structured output:
+'json_schema'
+: Uses dedicated structured output features offered by the provider.'function_calling'
+: Derives structured output by forcing a tool call that follows the given schema.'json_mode'
+: A precursor to'json_schema'
+offered by some providers. Generates valid JSON, but the schema must be described in the prompt.
+- Include raw: Set
+include_raw=True
+to get both the parsed output and the raw AI message. - Validation: Pydantic models provide automatic validation.
+TypedDict
+and JSON Schema require manual validation.
+Example: Message output alongside parsed structure
+Example: Message output alongside parsed structure
+It can be useful to return the raw
+AIMessage
+object alongside the parsed representation to access response metadata such as token counts. To do this, set include_raw=True
+when calling with_structured_output
+:Example: Nested structures
+Example: Nested structures
+Schemas can be nested:
+Advanced topics
+Model profiles
+Model profiles require
+langchain>=1.1
+..profile
+attribute:
+- Summarization middleware can trigger summarization based on a model’s context window size.
+- Structured output strategies in
+create_agent
+can be inferred automatically (e.g., by checking support for native structured output features). - Model inputs can be gated based on supported modalities and maximum input tokens.
+Updating or overwriting profile data
+Updating or overwriting profile data
+Model profile data can be changed if it is missing, stale, or incorrect.Option 1 (quick fix)You can instantiate a chat model with any valid profile:The Option 2 (fix data upstream)The primary source for the data is the models.dev project. This data is merged with additional fields and overrides in LangChain integration packages and are shipped with those packages.Model profile data can be updated through the following process:This command:
+profile
+is also a regular dict
+and can be updated in place. If the model instance is shared, consider using model_copy
+to avoid mutating shared state.- (If needed) update the source data at models.dev through a pull request to its repository on GitHub.
+- (If needed) update additional fields and overrides in
+langchain_<package>/data/profile_augmentations.toml
+through a pull request to the LangChain integration package`. - Use the
+langchain-model-profiles
+CLI tool to pull the latest data from models.dev, merge in the augmentations and update the profile data:
+- Downloads the latest data for
+<provider>
+from models.dev - Merges augmentations from
+profile_augmentations.toml
+in<data_dir>
+- Writes merged profiles to
+profiles.py
+in<data_dir>
+libs/partners/anthropic
+in the LangChain monorepo:Multimodal
+Certain models can process and return non-textual data such as images, audio, and video. You can pass non-textual data to a model by providing content blocks. See the multimodal section of the messages guide for details. can return multimodal data as part of their response. If invoked to do so, the resultingAIMessage
+will have content blocks with multimodal types.
+Multimodal output
+Reasoning
+Many models are capable of performing multi-step reasoning to arrive at a conclusion. This involves breaking down complex problems into smaller, more manageable steps. If supported by the underlying model, you can surface this reasoning process to better understand how the model arrived at its final answer.'low'
+or 'high'
+) or integer token budgets.
+For details, see the integrations page or reference for your respective chat model.
+Local models
+LangChain supports running models locally on your own hardware. This is useful for scenarios where either data privacy is critical, you want to invoke a custom model, or when you want to avoid the costs incurred when using a cloud-based model. Ollama is one of the easiest ways to run chat and embedding models locally.Prompt caching
+Many providers offer prompt caching features to reduce latency and cost on repeat processing of the same tokens. These features can be implicit or explicit:- Implicit prompt caching: providers will automatically pass on cost savings if a request hits a cache. Examples: OpenAI and Gemini.
+- Explicit caching: providers allow you to manually indicate cache points for greater control or to guarantee cost savings. Examples:
+ChatOpenAI
+(viaprompt_cache_key
+)- Anthropic’s
+AnthropicPromptCachingMiddleware
+- Gemini.
+- AWS Bedrock
+Server-side tool use
+Some providers support server-side tool-calling loops: models can interact with web search, code interpreters, and other tools and analyze the results in a single conversational turn. If a model invokes a tool server-side, the content of the response message will include content representing the invocation and result of the tool. Accessing the content blocks of the response will return the server-side tool calls and results in a provider-agnostic format:Invoke with server-side tool use
+Result
+Rate limiting
+Many chat model providers impose a limit on the number of invocations that can be made in a given time period. If you hit a rate limit, you will typically receive a rate limit error response from the provider, and will need to wait before making more requests. To help manage rate limits, chat model integrations accept arate_limiter
+parameter that can be provided during initialization to control the rate at which requests are made.
+Initialize and use a rate limiter
+Initialize and use a rate limiter
+LangChain in comes with (an optional) built-in
+InMemoryRateLimiter
+. This limiter is thread safe and can be shared by multiple threads in the same process.Define a rate limiter
+Base URL or proxy
+For many chat model integrations, you can configure the base URL for API requests, which allows you to use model providers that have OpenAI-compatible APIs or to use a proxy server.Base URL
+Base URL
+Many model providers offer OpenAI-compatible APIs (e.g., Together AI, vLLM). You can use
+init_chat_model
+with these providers by specifying the appropriate base_url
+parameter:When using direct chat model class instantiation, the parameter name may vary by provider. Check the respective reference for details.
+Proxy configuration
+Proxy configuration
+For deployments requiring HTTP proxies, some model integrations support proxy configuration:
+Proxy support varies by integration. Check the specific model provider’s reference for proxy configuration options.
+Log probabilities
+Certain models can be configured to return token-level log probabilities representing the likelihood of a given token by setting thelogprobs
+parameter when initializing the model:
+Token usage
+A number of model providers return token usage information as part of the invocation response. When available, this information will be included on theAIMessage
+objects produced by the corresponding model. For more details, see the messages guide.
+Some provider APIs, notably OpenAI and Azure OpenAI chat completions, require users opt-in to receiving token usage data in streaming contexts. See the streaming usage metadata section of the integration guide for details.
+- Callback handler
+- Context manager
+Invocation config
+When invoking a model, you can pass additional configuration through theconfig
+parameter using a RunnableConfig
+dictionary. This provides run-time control over execution behavior, callbacks, and metadata tracking.
+Common configuration options include:
+Invocation with config
+- Debugging with LangSmith tracing
+- Implementing custom logging or monitoring
+- Controlling resource usage in production
+- Tracking invocations across complex pipelines
+Key configuration attributes
+Key configuration attributes
+Identifies this specific invocation in logs and traces. Not inherited by sub-calls.
+Labels inherited by all sub-calls for filtering and organization in debugging tools.
+Custom key-value pairs for tracking additional context, inherited by all sub-calls.
+Controls the maximum number of parallel calls when using
+batch()
+or batch_as_completed()
+.Handlers for monitoring and responding to events during execution.
+Maximum recursion depth for chains to prevent infinite loops in complex pipelines.
+Configurable models
+You can also create a runtime-configurable model by specifyingconfigurable_fields
+. If you don’t specify a model value, then 'model'
+and 'model_provider'
+will be configurable by default.
+Configurable model with default values
+Configurable model with default values
+We can create a configurable model with default model values, specify which parameters are configurable, and add prefixes to configurable params:See the
+init_chat_model
+reference for more details on configurable_fields
+and config_prefix
+.Using a configurable model declaratively
+Using a configurable model declaratively
+We can call declarative operations like
+bind_tools
+, with_structured_output
+, with_configurable
+, etc. on a configurable model and chain a configurable model in the same way that we would a regularly instantiated chat model object.

@@ -1,0 +1,24 @@
+Python Runtime ServicesÂ¶
+The modules described in this chapter provide a wide range of services related to the Python interpreter and its interaction with its environment. Hereâs an overview:
+sys
+â System-specific parameters and functionssys.monitoring
+â Execution event monitoringsysconfig
+â Provide access to Pythonâs configuration informationbuiltins
+â Built-in objects__main__
+â Top-level code environmentwarnings
+â Warning controldataclasses
+â Data Classescontextlib
+â Utilities forwith
+-statement contextsabc
+â Abstract Base Classesatexit
+â Exit handlerstraceback
+â Print or retrieve a stack traceback__future__
+â Future statement definitionsgc
+â Garbage Collector interfaceinspect
+â Inspect live objectsannotationlib
+â Functionality for introspecting annotationssite
+â Site-specific configuration hook
+See also
+See the
+concurrent.interpreters
+module, which similarly exposes core runtime functionality.

@@ -1,0 +1,19 @@
+Concurrent ExecutionÂ¶
+The modules described in this chapter provide support for concurrent execution of code. The appropriate choice of tool will depend on the task to be executed (CPU bound vs IO bound) and preferred style of development (event driven cooperative multitasking vs preemptive multitasking). Hereâs an overview:
+threading
+â Thread-based parallelismmultiprocessing
+â Process-based parallelism- Introduction
+- Reference
+- Programming guidelines
+- Examples
+multiprocessing.shared_memory
+â Shared memory for direct access across processes- The
+concurrent
+package concurrent.futures
+â Launching parallel tasksconcurrent.interpreters
+â Multiple interpreters in the same processsubprocess
+â Subprocess managementsched
+â Event schedulerqueue
+â A synchronized queue classcontextvars
+â Context Variables
+The following are support modules for some of the above services:
