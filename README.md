@@ -85,7 +85,7 @@ MIT License - see [LICENSE](LICENSE) file
 
 ## 👤 Author
 
-**Your Name**
+**Islam Khaled**
 
 - GitHub: [islam9888]
   (https://github.com/islam9888)
