@@ -1,106 +1,205 @@
-# 🤖 RAG Documentation System
+## <img width="2156" height="1937" alt="rag_architecture_diagram" src="https://github.com/user-attachments/assets/8d81fcd4-be84-42a0-8fa5-983cacf68d83" />
+🤖 Production RAG Documentation Assistant
 
-A production-ready **Retrieval-Augmented Generation (RAG)** system for querying technical documentation. Built with LlamaIndex, ChromaDB, and Groq LLM.
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
-![LlamaIndex](https://img.shields.io/badge/LlamaIndex-0.10.0-orange.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
+A production-oriented Retrieval-Augmented Generation (RAG) system for technical documentation — built with hybrid retrieval, an evaluation pipeline, and full deployment on HuggingFace Spaces.
 
----
-
-## 🎯 Features
-
-- **Multi-Source Documentation**: Queries Python, FastAPI, LangChain, and LlamaIndex docs
-- **Persistent Vector Store**: ChromaDB for fast retrieval
-- **Context-Aware Responses**: Chat history integration
-- **Interactive UI**: Clean Gradio interface
-- **Source Attribution**: Automatic citation of relevant documents
-- **Export Functionality**: Save conversations for reference
+> **Live Demo:** [https://huggingface.co/spaces/islam9889/rag-docs-assistant]
 
 ---
 
-## 🏗️ Architecture
+## 🚀 Overview
+
+This project indexes 120+ technical documentation pages and provides grounded conversational answers with source citations. It goes beyond a standard tutorial RAG chatbot by adding hybrid retrieval reranking, latency tracking, and a retrieval evaluation framework.
+
+**Docs indexed:**
+- Python standard library & tutorial (40 pages)
+- FastAPI documentation (30 pages)
+- LangChain documentation (30 pages)
+- LlamaIndex documentation (20 pages)
+
+---
+
+## 🏗️ System Architecture
+
+```text
+┌─────────────────────┐
+│  Technical Documents │  (120+ pages: Python, FastAPI, LangChain, LlamaIndex)
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│  Chunking Pipeline   │  (~512 token chunks, 128 token overlap)
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│  BGE Embeddings      │  (BAAI/bge-small-en-v1.5)
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│  ChromaDB Vector DB  │  (Persistent, pre-built index)
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│  Semantic Retrieval  │  (Top-K similarity search)
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│  Hybrid Reranking    │  (Semantic score + keyword overlap)
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│  Groq LLM Generation │  (Llama 3.3 70B, low-latency inference)
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│  Gradio Chat UI      │  (Source citations, chat history export)
+└─────────────────────┘
+```
+
+---
+
+## ✨ Key Features
+
+### 🔍 Hybrid Retrieval
+Standard RAG uses pure vector similarity search, which can miss exact keyword matches. This system combines:
+- **Semantic search** — BGE embeddings find conceptually similar content
+- **Keyword reranking** — boosts chunks with direct term overlap
+
+Result: better retrieval on specific technical queries (function names, method signatures, library-specific terminology).
+
+### 📊 Evaluation Pipeline
+Built a lightweight evaluation framework (`evaluation.py`) that measures retrieval quality without requiring human labels:
+- **Relevance score** — keyword overlap between question and retrieved chunks (0.0–1.0)
+- **Latency tracking** — end-to-end response time per query
+
+This allows objective comparison of retrieval strategies, not just subjective "does it look right" testing.
+
+### 📚 Source-Grounded Responses
+Every answer includes the source documents used for generation — enabling answer verification and reducing blind trust in LLM outputs.
 
 ```
-User Question → Query Engine → Vector Store → LLM → Response + Sources
-                                    ↓
-                            120+ Embedded Documents
+📚 Sources:
+1. fastapi_tutorial_endpoints.txt
+2. python_decorators.txt
+3. llamaindex_retrieval.txt
 ```
 
-**Tech Stack:**
+### ⚡ Low-Latency Inference
+Groq-hosted Llama 3.3 70B delivers sub-second generation. Average end-to-end latency across evaluation set: **0.66s**.
 
-- **LLM**: Groq Llama 3.3 70B (fast inference)
-- **Embeddings**: BGE-small-en-v1.5 (efficient & accurate)
-- **Vector DB**: ChromaDB (persistent storage)
-- **Framework**: LlamaIndex (orchestration)
-- **UI**: Gradio (interactive chat)
+---
 
+## 📊 Evaluation Results
 
-## 🚀 Usage
+Evaluation run on 5 held-out questions not seen during indexing:
 
-### Option 1: Quick Start (Use Pre-scraped Docs)
+| Question | Relevance Score | Latency |
+|---|---|---|
+| What is a Python decorator? | 0.67 | 1.39s |
+| What is FastAPI? | 1.00 | 0.25s |
+| What is RAG in LLMs? | 0.67 | 0.34s |
+| How do I create a POST endpoint? | 0.83 | 0.52s |
+| What are LangChain chains? | 0.72 | 0.80s |
+| **Average** | **0.78** | **0.66s** |
 
-If you already have the scraped documents:
+> **Relevance score** = keyword overlap ratio between the question terms and retrieved source chunks. A score of 1.0 means all question keywords appeared in retrieved documents.
+
+---
+
+## 📈 How This Differs From a Tutorial RAG
+
+| Feature | Tutorial RAG | This Project |
+|---|---|---|
+| Retrieval | Pure vector similarity | Hybrid (semantic + keyword) |
+| Evaluation | None | Automated relevance + latency scoring |
+| Source attribution | Optional | Built-in, every response |
+| Deployment | Local notebook | HuggingFace Spaces |
+| Vector store | In-memory | Persistent ChromaDB |
+| Architecture | Single script | Modular (app, evaluation, vectorstore) |
+
+---
+
+## 🛠️ Tech Stack
+
+| Component | Technology |
+|---|---|
+| LLM | Groq + Llama 3.3 70B |
+| RAG Framework | LlamaIndex |
+| Vector Database | ChromaDB (persistent) |
+| Embeddings | BAAI/bge-small-en-v1.5 |
+| UI | Gradio |
+| Deployment | HuggingFace Spaces |
+| Language | Python 3.10+ |
+
+---
+
+## 📂 Project Structure
+
+```
+.
+├── app.py              # Gradio UI + RAG query logic
+├── evaluation.py       # Retrieval evaluation pipeline
+├── requirements.txt    # Dependencies
+├── vectorstore/        # Pre-built ChromaDB index
+│   ├── chroma.sqlite3
+│   └── ...
+└── README.md
+```
+
+---
+
+## ▶️ Running Locally
 
 ```bash
-# Build the vector store (5-10 minutes, one-time)
-python scripts/build_index.py
+# Install dependencies
+pip install -r requirements.txt
 
-# Launch the app
-python app/gradio_app.py
+# Set your Groq API key
+export GROQ_API_KEY=your_api_key_here
+
+# Run the app
+python app.py
 ```
 
-Open browser at `http://localhost:7860`
+---
 
-### Option 2: Scrape Fresh Documentation
+## 🧪 Running the Evaluation
 
 ```bash
-# Scrape documentation (20-30 minutes)
-python scripts/scrape_docs.py
+python evaluation.py
+```
 
-# Build index
-python scripts/build_index.py
+Output:
+```
+Q: What is a Python decorator?
+Score: 0.67 | Latency: 1.39s
 
-# Launch app
-python app/gradio_app.py
+====== FINAL RESULTS ======
+Avg Score: 0.78
+Avg Latency: 0.66s
 ```
 
 ---
 
+## 🔮 Future Improvements
 
-## 📊 Performance
-
-- **Response Time**: ~2-3 seconds per query
-- **Documents**: 120+ technical documentation pages
-- **Vector Store Size**: ~50MB
-- **Embedding Time**: 5-10 minutes (one-time)
-
----
-
-## 📄 License
-
-MIT License - see [LICENSE](LICENSE) file
+- Cross-encoder reranking (e.g. `bge-reranker-base`)
+- Multi-query retrieval for complex questions
+- Streaming responses
+- LangSmith tracing and observability
+- Dockerized deployment
+- Conversation memory across sessions
 
 ---
 
-## 👤 Author
+## 👨‍💻 Author
 
-**Islam Khaled**
-
-- GitHub: [islam9888]
-  (https://github.com/islam9888)
-- LinkedIn: [islam-khaled-129715367]
-   (www.linkedin.com/in/islam-khaled-129715367)
-
----
-
-## 🙏 Acknowledgments
-
-- [LlamaIndex](https://www.llamaindex.ai/) for the RAG framework
-- [Groq](https://groq.com/) for fast LLM inference
-- [ChromaDB](https://www.trychroma.com/) for vector storage
-- Official documentation sources: Python, FastAPI, LangChain, LlamaIndex
-
----
-
-**⭐ If you find this project useful, please give it a star!**
+**Islam Khaled** — ML Engineer, NLP & Generative AI
+[LinkedIn](https://www.linkedin.com/in/islam-khaled-129715367) · [HuggingFace](https://huggingface.co/islam9889)
